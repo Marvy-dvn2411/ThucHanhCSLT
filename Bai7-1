@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<string.h>
+#define MAX_LEN 100
+int main(){
+	char s1[MAX_LEN], s2[MAX_LEN];
+	int len1, len2;
+	printf("Ban hay nhap dong 1 :");
+	scanf("%s",s1);
+	len1 = strlen(s1);
+	printf("Ban hay nhap dong 2 :");
+	scanf("%s",s2);
+	len2 = strlen(s2);
+	printf("%s %d\n",s1,len1);
+	printf("%s %d\n",s2,len2);
+}
