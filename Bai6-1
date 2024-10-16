@@ -1,0 +1,146 @@
+#include<stdio.h>
+#define MAX 10
+typedef int MATRAN[MAX][MAX];
+//-----------bai a---------------------
+void nhap(int &d, int &c)
+{
+	printf("Nhap so dong va so cot:");
+	scanf("%d%d",&d,&c);
+}
+
+void nhapmang2chieu(MATRAN a , int d, int c)
+{
+	for (int i = 0; i<d ; i++)
+	{
+		for(int j=0;j<c;j++)
+		{
+			printf ("a[%d][%d]= ",i,j);
+			scanf("%d",&a[i][j]);
+		}
+	}
+}
+//-------------bai b------------------------
+void xuatmang2chieu(MATRAN a, int d , int c)
+{
+	for ( int i=0;i<d;i++)
+	{
+		for (int j = 0; j<c;j++ )
+		{
+			printf ("%d\t",a[i][j]);
+		}
+		printf ("\n");
+		
+	}
+}
+//---------------bai c-------------------------
+int tongcacso (MATRAN a, int d,int c)
+{
+	
+	int s=0;
+	for (int i = 0; i<d;i++)
+	{
+		for (int j = 0; j<c;j++  )
+		{
+			s+= a[i][j];
+		}
+	}
+	return s;
+}
+//-------------------bai d----------------------
+
+float tbc(MATRAN a, int d,int c)
+{
+	float trungbinhcong;
+return (float)tongcacso(a,d,c)/ (d*c);
+}
+
+//-------------------bai e-----------------------
+float tbcduong (MATRAN a,int d, int c)
+{
+	int dem=0;
+	int soduong = 0;
+	for (int i =0; i<d;i++)
+	{
+		for (int j=0; j<c; j++)
+		{
+			if (a[i][j]>0)
+			{
+				dem++;
+				soduong+= a[i][j];
+				
+			}
+		}
+	}
+	return (float)soduong/dem;
+}
+//--------------bai f-------------------
+void xuatdongk(MATRAN a,int d,int c,int k)
+{
+	for(int j = 0; j<c;j++)
+	{
+		printf("%4d",a[k][j]);
+	}
+	printf("\n");
+}
+//--------bai g---------------------
+int tinhtongcot(MATRAN a, int d,int c,int k)
+{
+	int tongcot=0;
+	for(int i =0;i<d;i++)
+	{
+		tongcot+= a[i][k];
+	}
+	return tongcot;
+}
+//--------------bai h-------------------
+int giatriMax(MATRAN a, int d , int c)
+{
+	int Max= 0;
+	for (int i =0;i<d;i++)
+	{
+		for (int j = 0 ; j<c;j++)
+		{
+			if(Max<a[i][j])
+				Max=a[i][j];
+		}
+	}
+	return Max;
+}
+//-------------ham main-------------------
+int main(){
+	int d,c,k;
+	MATRAN a;
+	nhap( d , c );
+	nhapmang2chieu( a , d , c );
+	xuatmang2chieu( a , d , c );
+	tongcacso(a,d,c); 
+	printf("tong cac so co trong mang la :%d",tongcacso(a,d,c));
+	printf("\nTrung binh cong cac so co trong mang la: %.2f",tbc(a,d,c));
+	printf("\nTrung binh cong cac so duong la : %.2f",tbcduong(a,d,c));
+	printf("\nNhap dong muon xuat k=");scanf("%d",&k);
+	xuatdongk(a,d,c,k);
+	printf("\nTong cac so co trong cot k la: %d",tinhtongcot(a,d,c,k));
+	printf("\n Gia tri lon nhat co trong mang la : %d ",giatriMax(a,d,c));
+return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
