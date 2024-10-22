@@ -1,0 +1,244 @@
+//Câu 7
+
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int N;
+    double total = 0;
+
+    // Nhập số điện tiêu thụ
+    printf("Nhập số kWh tiêu thụ trong tháng: ");
+    scanf("%d", &N);
+
+    // Tính tiền điện theo từng bậc
+    if (N > 500) {
+        total += (N - 500) * 2927;
+        N = 500;
+    }
+    if (N > 400) {
+        total += (N - 400) * 2834;
+        N = 400;
+    }
+    if (N > 300) {
+        total += (N - 300) * 2536;
+        N = 300;
+    }
+    if (N > 200) {
+        total += (N - 200) * 2014;
+        N = 200;
+    }
+    if (N > 100) {
+        total += (N - 100) * 1734;
+        N = 100;
+    }
+    total += N * 1678;
+
+    // Tính tổng tiền điện sau khi thêm VAT
+    total = total * 1.1;  // Cộng thêm 10% VAT
+
+    // Làm tròn kết quả
+    total = round(total);
+
+    // In ra kết quả
+    printf("Tổng số tiền điện phải trả là: %.0f VND\n", total);
+
+    return 0;
+}
+
+
+
+
+//BÀI TẬP VỀ NHÀ 
+
+//Câu 8: Viết chương trình nhập số nguyên có ba chữ số, hiển thị cách đọc số đó
+
+#include <stdio.h>
+
+void docHangChuc(int num) {
+    switch (num) {
+        case 1: printf("muoi "); break;
+        case 2: printf("hai muoi "); break;
+        case 3: printf("ba muoi "); break;
+        case 4: printf("bon muoi "); break;
+        case 5: printf("nam muoi "); break;
+        case 6: printf("sau muoi "); break;
+        case 7: printf("bay muoi "); break;
+        case 8: printf("tam muoi "); break;
+        case 9: printf("chin muoi "); break;
+    }
+}
+
+void docHangDonVi(int num) {
+    switch (num) {
+        case 0: printf(""); break;
+        case 1: printf("mot"); break;
+        case 2: printf("hai"); break;
+        case 3: printf("ba"); break;
+        case 4: printf("bon"); break;
+        case 5: printf("nam"); break;
+        case 6: printf("sau"); break;
+        case 7: printf("bay"); break;
+        case 8: printf("tam"); break;
+        case 9: printf("chin"); break;
+    }
+}
+
+int main() {
+    int num;
+    printf("Nhap vao so nguyen co 3 chu so: ");
+    scanf("%d", &num);
+
+    if (num < 100 || num > 999) {
+        printf("Vui long nhap so co 3 chu so.");
+        return 0;
+    }
+
+    int tram = num / 100;
+    int chuc = (num / 10) % 10;
+    int donvi = num % 10;
+
+    switch (tram) {
+        case 1: printf("mot tram "); break;
+        case 2: printf("hai tram "); break;
+        case 3: printf("ba tram "); break;
+        case 4: printf("bon tram "); break;
+        case 5: printf("nam tram "); break;
+        case 6: printf("sau tram "); break;
+        case 7: printf("bay tram "); break;
+        case 8: printf("tam tram "); break;
+        case 9: printf("chin tram "); break;
+    }
+
+    docHangChuc(chuc);
+    docHangDonVi(donvi);
+
+    return 0;
+}
+
+//Câu 9: Kiểm tra số nguyên dương có 5 chữ số có tăng dần đều hay không
+
+#include <stdio.h>
+
+int main() {
+    int num;
+    printf("Nhap vao so nguyen co 5 chu so: ");
+    scanf("%d", &num);
+
+    if (num < 10000 || num > 99999) {
+        printf("Vui long nhap so co 5 chu so.");
+        return 0;
+    }
+
+    int donvi1 = num % 10;
+    num /= 10;
+    int donvi2 = num % 10;
+    num /= 10;
+    int donvi3 = num % 10;
+    num /= 10;
+    int donvi4 = num % 10;
+    num /= 10;
+    int donvi5 = num;
+
+    if (donvi5 < donvi4 && donvi4 < donvi3 && donvi3 < donvi2 && donvi2 < donvi1) {
+        printf("So nay tang dan tu trai sang phai.\n");
+    } else {
+        printf("So nay khong tang dan tu trai sang phai.\n");
+    }
+
+    return 0;
+}
+
+//Câu 10: Kiểm tra tháng thuộc quý mấy
+
+#include <stdio.h>
+
+int main() {
+    int month;
+    printf("Nhap vao thang cua nam (1-12): ");
+    scanf("%d", &month);
+
+    if (month < 1 || month > 12) {
+        printf("Vui long nhap thang tu 1 den 12.\n");
+        return 0;
+    }
+
+    if (month >= 1 && month <= 3) {
+        printf("Thang %d thuoc quy 1.\n", month);
+    } else if (month >= 4 && month <= 6) {
+        printf("Thang %d thuoc quy 2.\n", month);
+    } else if (month >= 7 && month <= 9) {
+        printf("Thang %d thuoc quy 3.\n", month);
+    } else {
+        printf("Thang %d thuoc quy 4.\n", month);
+    }
+
+    return 0;
+}
+
+//Câu 11: Kiểm tra số thực âm và lấy giá trị tuyệt đối nếu là số âm
+
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    float x, y, z;
+    printf("Nhap vao 3 so thuc: ");
+    scanf("%f %f %f", &x, &y, &z);
+
+    if (x < 0) {
+        x = fabs(x);
+    }
+    if (y < 0) {
+        y = fabs(y);
+    }
+    if (z < 0) {
+        z = fabs(z);
+    }
+
+    printf("Gia tri tuyet doi cua x: %.2f\n", x);
+    printf("Gia tri tuyet doi cua y: %.2f\n", y);
+    printf("Gia tri tuyet doi cua z: %.2f\n", z);
+
+    return 0;
+}
+
+//Câu 12-13: Giải hệ phương trình
+
+Phương trình:
+
+ax + by = c
+dx + ey = f
+
+Chúng ta sẽ sử dụng định lý Cramer để giải hệ phương trình:
+
+#include <stdio.h>
+
+int main() {
+    int a, b, c, d, e, f;
+    printf("Nhap he so a, b, c cua phuong trinh ax + by = c: ");
+    scanf("%d %d %d", &a, &b, &c);
+
+    printf("Nhap he so d, e, f cua phuong trinh dx + ey = f: ");
+    scanf("%d %d %d", &d, &e, &f);
+
+    int D = a * e - b * d;
+    int Dx = c * e - b * f;
+    int Dy = a * f - c * d;
+
+    if (D == 0) {
+        if (Dx == 0 && Dy == 0) {
+            printf("He phuong trinh vo so nghiem.\n");
+        } else {
+            printf("He phuong trinh vo nghiem.\n");
+        }
+    } else {
+        float x = (float) Dx / D;
+        float y = (float) Dy / D;
+        printf("Nghiem cua he phuong trinh la: x = %.2f, y = %.2f\n", x, y);
+    }
+
+    return 0;
+}
+
