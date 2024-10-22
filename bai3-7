@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int x, n, tiepTuc;
+
+    // Khởi tạo bộ sinh số ngẫu nhiên
+    srand(time(NULL));
+    x = rand() % 100;
+
+    printf("Chương trình đoán số (0 < x < 100).\n");
+
+    do {
+        printf("Nhập giá trị dự đoán (0 < n < 100): ");
+        scanf("%d", &n);
+
+        if (n < x) {
+            printf("Cao hơn!\n");
+        } else if (n > x) {
+            printf("Thấp hơn!\n");
+        } else {
+            printf("Chúc mừng! Bạn đã đoán đúng.\n");
+        }
+
+        printf("Bạn có muốn tiếp tục không? (1: tiếp tục, 0: dừng): ");
+        scanf("%d", &tiepTuc);
+
+    } while (tiepTuc == 1);
+
+    return 0;
+}
