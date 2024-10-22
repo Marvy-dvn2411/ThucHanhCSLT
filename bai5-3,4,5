@@ -1,0 +1,329 @@
+Câu 3: Chương trình thao tác với mảng số nguyên
+
+#include <stdio.h>
+
+#define MAX 20
+
+void nhapMang(int arr[], int *n) {
+    do {
+        printf("Nhap so phan tu cua mang (3 <= n <= 20): ");
+        scanf("%d", n);
+    } while (*n < 3 || *n > 20);
+    
+    for (int i = 0; i < *n; i++) {
+        printf("Nhap phan tu thu %d: ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+}
+
+void xuatMang(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void themDauMang(int arr[], int *n, int d) {
+    for (int i = *n; i > 0; i--) {
+        arr[i] = arr[i - 1];
+    }
+    arr[0] = d;
+    (*n)++;
+}
+
+void themCuoiMang(int arr[], int *n, int c) {
+    arr[*n] = c;
+    (*n)++;
+}
+
+void themTaiViTri(int arr[], int *n, int k, int t) {
+    if (t >= 0 && t <= *n) {
+        for (int i = *n; i > t; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[t] = k;
+        (*n)++;
+    }
+}
+
+void xoaDauMang(int arr[], int *n) {
+    for (int i = 0; i < *n - 1; i++) {
+        arr[i] = arr[i + 1];
+    }
+    (*n)--;
+}
+
+void xoaCuoiMang(int arr[], int *n) {
+    (*n)--;
+}
+
+void xoaTaiViTri(int arr[], int *n, int t) {
+    if (t >= 0 && t < *n) {
+        for (int i = t; i < *n - 1; i++) {
+            arr[i] = arr[i + 1];
+        }
+        (*n)--;
+    }
+}
+
+int main() {
+    int arr[MAX], n;
+    nhapMang(arr, &n);
+    
+    int d, c, k, t;
+    
+    printf("Nhap phan tu d can them vao dau mang: ");
+    scanf("%d", &d);
+    themDauMang(arr, &n, d);
+    xuatMang(arr, n);
+    
+    printf("Nhap phan tu c can them vao cuoi mang: ");
+    scanf("%d", &c);
+    themCuoiMang(arr, &n, c);
+    xuatMang(arr, n);
+    
+    printf("Nhap phan tu k can them va vi tri t: ");
+    scanf("%d %d", &k, &t);
+    themTaiViTri(arr, &n, k, t);
+    xuatMang(arr, n);
+    
+    printf("Xoa phan tu dau tien: \n");
+    xoaDauMang(arr, &n);
+    xuatMang(arr, n);
+    
+    printf("Xoa phan tu cuoi cung: \n");
+    xoaCuoiMang(arr, &n);
+    xuatMang(arr, n);
+    
+    printf("Nhap vi tri can xoa t: ");
+    scanf("%d", &t);
+    xoaTaiViTri(arr, &n, t);
+    xuatMang(arr, n);
+    
+    return 0;
+}
+
+Câu 4: Chương trình thao tác với mảng kiểm tra số trùng và tính toán
+
+#include <stdio.h>
+#include <math.h>
+
+#define MAX 20
+
+int laChinhPhuong(int n) {
+    int sqrtN = sqrt(n);
+    return (sqrtN * sqrtN == n);
+}
+
+void nhapMangKhongTrung(int arr[], int *n) {
+    do {
+        printf("Nhap so phan tu cua mang: ");
+        scanf("%d", n);
+    } while (*n < 3 || *n > 20);
+    
+    for (int i = 0; i < *n; i++) {
+        int temp;
+        int trung;
+        do {
+            trung = 0;
+            printf("Nhap phan tu thu %d: ", i + 1);
+            scanf("%d", &temp);
+            for (int j = 0; j < i; j++) {
+                if (arr[j] == temp) {
+                    printf("Phan tu da ton tai. Nhap lai!\n");
+                    trung = 1;
+                    break;
+                }
+            }
+        } while (trung);
+        arr[i] = temp;
+    }
+}
+
+void xuatMang(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+void xuatChinhPhuongViTriLe(int arr[], int n) {
+    printf("Cac so chinh phuong tai vi tri le: ");
+    for (int i = 1; i < n; i += 2) {
+        if (laChinhPhuong(arr[i])) {
+            printf("%d ", arr[i]);
+        }
+    }
+    printf("\n");
+}
+
+void viTriLonNhat(int arr[], int n) {
+    int max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    
+    printf("Vi tri cac phan tu lon nhat: ");
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == max) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+}
+
+int tinhTongViTriChan(int arr[], int n) {
+    int tong = 0;
+    for (int i = 0; i < n; i += 2) {
+        tong += arr[i];
+    }
+    return tong;
+}
+
+void sapXepTangDan(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] > arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[MAX], n;
+    nhapMangKhongTrung(arr, &n);
+    
+    xuatMang(arr, n);
+    xuatChinhPhuongViTriLe(arr, n);
+    viTriLonNhat(arr, n);
+    
+    int tong = tinhTongViTriChan(arr, n);
+    printf("Tong cac phan tu tai vi tri chan: %d\n", tong);
+    
+    sapXepTangDan(arr, n);
+    printf("Mang sau khi sap xep tang dan: ");
+    xuatMang(arr, n);
+    
+    return 0;
+}
+
+
+BÀI TẬP VỀ NHÀ 
+
+
+Câu 5: Chương trình thao tác với mảng số thực
+
+#include <stdio.h>
+
+#define MAX 100
+
+void nhapMangSoThuc(float arr[], int *n) {
+    do {
+        printf("Nhap so phan tu cua mang (0 < n <= 100): ");
+        scanf("%d", n);
+    } while (*n <= 0 || *n > 100);
+    
+    for (int i = 0; i < *n; i++) {
+        printf("Nhap phan tu thu %d: ", i + 1);
+        scanf("%f", &arr[i]);
+    }
+}
+
+void xuatMangSoThuc(float arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        printf("%.2f ", arr[i]);
+    }
+    printf("\n");
+}
+
+float tinhTrungBinhAm(float arr[], int n) {
+    float tong = 0;
+    int dem = 0;
+    for (int i = 0; i < n; i++) {
+        if (arr[i] < 0) {
+            tong += arr[i];
+            dem++;
+        }
+    }
+    if (dem == 0) {
+        printf("Khong co phan tu am nao trong mang.\n");
+        return 0;
+    }
+    return tong / dem;
+}
+
+int timViTriAmDauTien(float arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] < 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+int laMangDoiXung(float arr[], int n) {
+    for (int i = 0; i < n / 2; i++) {
+        if (arr[i] != arr[n - i - 1]) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void viTriLonNhat(float arr[], int n) {
+    float max = arr[0];
+    for (int i = 1; i < n; i++) {
+        if (arr[i] > max) {
+            max = arr[i];
+        }
+    }
+    
+    printf("Vi tri cac phan tu lon nhat: ");
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == max) {
+            printf("%d ", i);
+        }
+    }
+    printf("\n");
+}
+
+int main() {
+    float arr[MAX];
+    int n;
+    
+    nhapMangSoThuc(arr, &n);
+    
+    printf("Mang vua nhap: ");
+    xuatMangSoThuc(arr, n);
+    
+    // Tính trung bình cộng các phần tử âm
+    float tbcAm = tinhTrungBinhAm(arr, n);
+    if (tbcAm != 0) {
+        printf("Trung binh cong cac phan tu am: %.2f\n", tbcAm);
+    }
+    
+    // Tìm vị trí phần tử âm đầu tiên
+    int viTriAmDau = timViTriAmDauTien(arr, n);
+    if (viTriAmDau != -1) {
+        printf("Vi tri phan tu am dau tien: %d\n", viTriAmDau);
+    } else {
+        printf("Khong co phan tu am nao trong mang.\n");
+    }
+    
+    // Kiểm tra mảng đối xứng
+    if (laMangDoiXung(arr, n)) {
+        printf("Mang doi xung.\n");
+    } else {
+        printf("Mang khong doi xung.\n");
+    }
+    
+    // Xuất vị trí các phần tử lớn nhất
+    viTriLonNhat(arr, n);
+    
+    return 0;
+}
