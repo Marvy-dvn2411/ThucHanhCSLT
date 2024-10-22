@@ -1,0 +1,225 @@
+Câu 4: Viết chương trình in ra tam giác Pascal
+
+#include <stdio.h>
+
+void tamGiacPascal(int n) {
+    int arr[n][n];
+
+    // Tạo tam giác Pascal
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j <= i; j++) {
+            // Số đầu và số cuối mỗi dòng là 1
+            if (j == 0 || j == i)
+                arr[i][j] = 1;
+            else
+                arr[i][j] = arr[i - 1][j - 1] + arr[i - 1][j];
+            printf("%d ", arr[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int n;
+    printf("Nhập số dòng của tam giác Pascal: ");
+    scanf("%d", &n);
+    tamGiacPascal(n);
+    return 0;
+}
+
+Câu 5: Viết chương trình tính tổng của hai ma trận các số nguyên
+
+#include <stdio.h>
+
+int main() {
+    int matran1[10][10], matran2[10][10], matran3[10][10];
+    int dong, cot;
+
+    // Nhập số dòng và cột của ma trận
+    printf("Nhập số dòng của ma trận: ");
+    scanf("%d", &dong);
+    printf("Nhập số cột của ma trận: ");
+    scanf("%d", &cot);
+
+    // Nhập ma trận thứ nhất
+    printf("Nhập ma trận 1:\n");
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            printf("matran1[%d][%d] = ", i, j);
+            scanf("%d", &matran1[i][j]);
+        }
+    }
+
+    // Nhập ma trận thứ hai
+    printf("Nhập ma trận 2:\n");
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            printf("matran2[%d][%d] = ", i, j);
+            scanf("%d", &matran2[i][j]);
+        }
+    }
+
+    // Tính tổng hai ma trận
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            matran3[i][j] = matran1[i][j] + matran2[i][j];
+        }
+    }
+
+    // Xuất tổng hai ma trận
+    printf("Tổng của hai ma trận là:\n");
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            printf("%d ", matran3[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+
+
+BÀI TẬP VỀ NHÀ 
+
+
+Câu 6: Các chức năng trong chương trình làm việc với ma trận
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+void nhapMaTran(int matran[10][10], int dong, int cot);
+void xuatMaTran(int matran[10][10], int dong, int cot);
+int tinhTongBien(int matran[10][10], int dong, int cot);
+float tinhTrungBinhCong(int matran[10][10], int dong, int cot);
+int kiemTraMaTranVuong(int dong, int cot);
+int tinhTongDuongCheo(int matran[10][10], int n);
+void sapXepTangDan(int matran[10][10], int dong, int cot);
+void sapXepGiamDan(int matran[10][10], int dong, int cot);
+
+int main() {
+    int matran[10][10];
+    int dong, cot;
+
+    // a. Nhập số dòng và số cột của ma trận
+    printf("Nhập số dòng của ma trận: ");
+    scanf("%d", &dong);
+    printf("Nhập số cột của ma trận: ");
+    scanf("%d", &cot);
+
+    // b. Sinh ma trận ngẫu nhiên
+    srand(time(NULL));
+    nhapMaTran(matran, dong, cot);
+
+    // c. Xuất ma trận
+    printf("Ma trận ngẫu nhiên là:\n");
+    xuatMaTran(matran, dong, cot);
+
+    // d. Tính tổng biên
+    int tongBien = tinhTongBien(matran, dong, cot);
+    printf("Tổng các phần tử biên: %d\n", tongBien);
+
+    // e. Tính trung bình cộng
+    float trungBinhCong = tinhTrungBinhCong(matran, dong, cot);
+    printf("Trung bình cộng các phần tử của ma trận: %.2f\n", trungBinhCong);
+
+    // f. Kiểm tra ma trận vuông và tính tổng hai đường chéo
+    if (kiemTraMaTranVuong(dong, cot)) {
+        int tongDuongCheo = tinhTongDuongCheo(matran, dong);
+        printf("Tổng hai đường chéo của ma trận vuông: %d\n", tongDuongCheo);
+    } else {
+        printf("Ma trận không phải là ma trận vuông.\n");
+    }
+
+    // g. Sắp xếp ma trận tăng dần theo dòng
+    sapXepTangDan(matran, dong, cot);
+    printf("Ma trận sau khi sắp xếp tăng dần theo dòng:\n");
+    xuatMaTran(matran, dong, cot);
+
+    // h. Sắp xếp ma trận giảm dần
+    sapXepGiamDan(matran, dong, cot);
+    printf("Ma trận sau khi sắp xếp giảm dần:\n");
+    xuatMaTran(matran, dong, cot);
+
+    return 0;
+}
+
+void nhapMaTran(int matran[10][10], int dong, int cot) {
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            matran[i][j] = rand() % 100; // giá trị ngẫu nhiên từ 0 đến 99
+        }
+    }
+}
+
+void xuatMaTran(int matran[10][10], int dong, int cot) {
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            printf("%d ", matran[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int tinhTongBien(int matran[10][10], int dong, int cot) {
+    int tong = 0;
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            if (i == 0 || i == dong - 1 || j == 0 || j == cot - 1) {
+                tong += matran[i][j];
+            }
+        }
+    }
+    return tong;
+}
+
+float tinhTrungBinhCong(int matran[10][10], int dong, int cot) {
+    int tong = 0;
+    int soPhanTu = dong * cot;
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot; j++) {
+            tong += matran[i][j];
+        }
+    }
+    return (float)tong / soPhanTu;
+}
+
+int kiemTraMaTranVuong(int dong, int cot) {
+    return dong == cot;
+}
+
+int tinhTongDuongCheo(int matran[10][10], int n) {
+    int tong = 0;
+    for (int i = 0; i < n; i++) {
+        tong += matran[i][i] + matran[i][n - i - 1];
+    }
+    return tong;
+}
+
+void sapXepTangDan(int matran[10][10], int dong, int cot) {
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot - 1; j++) {
+            for (int k = j + 1; k < cot; k++) {
+                if (matran[i][j] > matran[i][k]) {
+                    int temp = matran[i][j];
+                    matran[i][j] = matran[i][k];
+                    matran[i][k] = temp;
+                }
+            }
+        }
+    }
+}
+
+void sapXepGiamDan(int matran[10][10], int dong, int cot) {
+    for (int i = 0; i < dong; i++) {
+        for (int j = 0; j < cot - 1; j++) {
+            for (int k = j + 1; k < cot; k++) {
+                if (matran[i][j] < matran[i][k]) {
+                    int temp = matran[i][j];
+                    matran[i][j] = matran[i][k];
+                    matran[i][k] = temp;
+                }
+            }
+        }
+    }
+}
