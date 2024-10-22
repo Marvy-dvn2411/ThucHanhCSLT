@@ -1,0 +1,314 @@
+Câu 10: Chuyển chuỗi thành chữ hoa, chữ thường và chữ hoa mỗi chữ cái đầu từ
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void capitalizeFirstLetter(char *str) {
+    int i;
+    for (i = 0; str[i]; i++) {
+        if (i == 0 || str[i - 1] == ' ') {
+            str[i] = toupper(str[i]);
+        }
+    }
+}
+
+int main() {
+    char str[100];
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    
+    // Chuỗi viết hoa
+    char upper[100], lower[100], capitalized[100];
+    strcpy(upper, str);
+    strcpy(lower, str);
+    strcpy(capitalized, str);
+
+    // Chuyển thành chữ hoa
+    for (int i = 0; upper[i]; i++) {
+        upper[i] = toupper(upper[i]);
+    }
+
+    // Chuyển thành chữ thường
+    for (int i = 0; lower[i]; i++) {
+        lower[i] = tolower(lower[i]);
+    }
+
+    // Chuyển mỗi chữ cái đầu từ thành hoa
+    capitalizeFirstLetter(capitalized);
+
+    printf("Chuỗi viết hoa: %s", upper);
+    printf("Chuỗi viết thường: %s", lower);
+    printf("Chuỗi viết hoa mỗi chữ cái đầu: %s", capitalized);
+    
+    return 0;
+}
+
+Câu 12: Tìm số lần xuất hiện của các ký tự trong chuỗi
+
+#include <stdio.h>
+
+int main() {
+    char str[100];
+    int count[256] = {0};
+    
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    
+    for (int i = 0; str[i]; i++) {
+        count[(unsigned char)str[i]]++;
+    }
+    
+    printf("Số lần xuất hiện của các ký tự:\n");
+    for (int i = 0; i < 256; i++) {
+        if (count[i] > 0) {
+            printf("'%c': %d lần\n", i, count[i]);
+        }
+    }
+    
+    return 0;
+}
+
+Câu 13: Tìm từ dài nhất và ngắn nhất trong một chuỗi
+
+#include <stdio.h>
+#include <string.h>
+#include <limits.h>
+
+int main() {
+    char str[100], longest[50], shortest[50];
+    int maxLength = 0, minLength = INT_MAX;
+    
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    
+    char *token = strtok(str, " \n");
+    while (token != NULL) {
+        int len = strlen(token);
+        if (len > maxLength) {
+            maxLength = len;
+            strcpy(longest, token);
+        }
+        if (len < minLength) {
+            minLength = len;
+            strcpy(shortest, token);
+        }
+        token = strtok(NULL, " \n");
+    }
+    
+    printf("Từ dài nhất: %s\n", longest);
+    printf("Từ ngắn nhất: %s\n", shortest);
+    
+    return 0;
+}
+
+Câu 14: Kiểm tra một ký tự có phải là chữ số hay không
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char ch;
+    printf("Nhập một ký tự: ");
+    scanf(" %c", &ch);
+    
+    if (isdigit(ch)) {
+        printf("'%c' là một chữ số.\n", ch);
+    } else {
+        printf("'%c' không phải là một chữ số.\n", ch);
+    }
+    
+    return 0;
+}
+
+Câu 11: Đếm tổng số chữ cái, chữ số và ký tự đặc biệt trong một chuỗi
+
+#include <stdio.h>
+#include <ctype.h>
+
+int main() {
+    char str[100];
+    int letters = 0, digits = 0, specialChars = 0;
+    
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    
+    for (int i = 0; str[i]; i++) {
+        if (isalpha(str[i])) {
+            letters++;
+        } else if (isdigit(str[i])) {
+            digits++;
+        } else if (!isspace(str[i])) {
+            specialChars++;
+        }
+    }
+    
+    printf("Số chữ cái: %d\n", letters);
+    printf("Số chữ số: %d\n", digits);
+    printf("Số ký tự đặc biệt: %d\n", specialChars);
+    
+    return 0;
+}
+
+
+
+Bài Tập Về Nhà
+
+a. Tìm chuỗi con Palindromic dài nhất:
+
+#include <stdio.h>
+#include <string.h>
+
+int isPalindrome(char str[], int start, int end) {
+    while (start < end) {
+        if (str[start] != str[end]) {
+            return 0;
+        }
+        start++;
+        end--;
+    }
+    return 1;
+}
+
+void longestPalindrome(char str[]) {
+    int maxLength = 0, start = 0;
+    int len = strlen(str);
+
+    for (int i = 0; i < len; i++) {
+        for (int j = i; j < len; j++) {
+            if (isPalindrome(str, i, j) && (j - i + 1 > maxLength)) {
+                maxLength = j - i + 1;
+                start = i;
+            }
+        }
+    }
+    if (maxLength > 0) {
+        printf("Chuỗi con Palindromic dài nhất là: ");
+        for (int i = start; i < start + maxLength; i++) {
+            printf("%c", str[i]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    char str[100];
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    str[strcspn(str, "\n")] = 0; // Xóa ký tự newline
+    longestPalindrome(str);
+    return 0;
+}
+
+b. Thay thế từng chữ viết thường bằng cùng một chữ cái viết hoa:
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void replaceLowerToUpper(char *str) {
+    for (int i = 0; str[i]; i++) {
+        if (islower(str[i])) {
+            str[i] = toupper(str[i]);
+        }
+    }
+}
+
+int main() {
+    char str[100];
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    
+    replaceLowerToUpper(str);
+    printf("Chuỗi sau khi thay thế: %s", str);
+    
+    return 0;
+}
+
+c. Xóa tất cả các ký tự trong chuỗi ngoại trừ các ký tự trong bảng chữ cái:
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void removeNonAlphabetic(char *str) {
+    int j = 0;
+    for (int i = 0; str[i]; i++) {
+        if (isalpha(str[i])) {
+            str[j++] = str[i];
+        }
+    }
+    str[j] = '\0';
+}
+
+int main() {
+    char str[100];
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    
+    removeNonAlphabetic(str);
+    printf("Chuỗi sau khi xóa ký tự không phải chữ cái: %s\n", str);
+    
+    return 0;
+}
+
+d. Đếm số ký tự là nguyên âm và phụ âm trong một chuỗi:
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void countVowelsAndConsonants(char *str) {
+    int vowels = 0, consonants = 0;
+    
+    for (int i = 0; str[i]; i++) {
+        char ch = tolower(str[i]);
+        if (isalpha(ch)) {
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u') {
+                vowels++;
+            } else {
+                consonants++;
+            }
+        }
+    }
+    
+    printf("Số nguyên âm: %d\n", vowels);
+    printf("Số phụ âm: %d\n", consonants);
+}
+
+int main() {
+    char str[100];
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+    
+    countVowelsAndConsonants(str);
+    
+    return 0;
+}
+
+e. Đếm số lần xuất hiện nhiều nhất của một ký tự trong chuỗi:
+
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char str[100];
+    int count[256] = {0};
+    int maxCount = 0;
+    char maxChar;
+
+    printf("Nhập chuỗi: ");
+    fgets(str, sizeof(str), stdin);
+
+    for (int i = 0; str[i]; i++) {
+        count[(unsigned char)str[i]]++;
+        if (count[(unsigned char)str[i]] > maxCount) {
+            maxCount = count[(unsigned char)str[i]];
+            max
+
+
+
+
+
+
+
