@@ -1,0 +1,53 @@
+#include <stdio.h>
+//cau a
+void caua(int n) {
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+//cau b 
+
+void hinhb(int n) {
+    for (int i = n; i >= 1; --i) {
+        for (int j = 0; j < i; ++j) {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+//cau c 
+void cauc(int n) {
+    for (int i = n; i >= 1; --i) {
+        for (int j = 0; j < i; ++j) {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+// cau d
+void caud(int n) {
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 0; j < i; ++j) {
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+int main() {
+    int n;
+    printf("Nhập số dòng (0 < n <= 10): ");
+    scanf("%d", &n);
+    caua(n);
+    caub(n);
+    cauc(n);
+    caud(n);
+    return 0;
+}
+
+
+
+
+
