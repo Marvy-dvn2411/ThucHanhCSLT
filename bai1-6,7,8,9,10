@@ -1,0 +1,112 @@
+Bài 1
+
+//Câu 6: Viết chương trình đảo ngược một số nguyên dương có đúng ba chữ số.
+#include <stdio.h>
+
+int main() {
+    int n, reversedNumber = 0;
+
+    // Nhập số có 3 chữ số
+    printf("Nhập vào một số nguyên dương có 3 chữ số: ");
+    scanf("%d", &n);
+
+    // Đảo ngược số
+    reversedNumber += (n % 10) * 100; // Lấy chữ số hàng đơn vị
+    n /= 10;
+    reversedNumber += (n % 10) * 10;  // Lấy chữ số hàng chục
+    n /= 10;
+    reversedNumber += n;              // Lấy chữ số hàng trăm
+
+    // In ra kết quả
+    printf("Số sau khi đảo ngược: %d\n", reversedNumber);
+
+    return 0;
+}
+
+//Câu 7: Viết chương trình để hoán đổi hai giá trị a và b.
+#include <stdio.h>
+
+int main() {
+    int a, b, temp;
+
+    // Nhập hai số nguyên
+    printf("Nhập hai số nguyên a và b: ");
+    scanf("%d %d", &a, &b);
+
+    // In ra giá trị trước khi hoán vị
+    printf("Trước khi hoán vị: a = %d, b = %d\n", a, b);
+
+    // Hoán vị giá trị của a và b
+    temp = a;
+    a = b;
+    b = temp;
+
+    // In ra giá trị sau khi hoán vị
+    printf("Sau khi hoán vị: a = %d, b = %d\n", a, b);
+
+    return 0;
+}
+
+
+
+
+
+//Câu 8: Tính diện tích tam giác
+#include <stdio.h>
+
+int main() {
+    float x, h, S;
+
+    // Nhập cạnh đáy và chiều cao của tam giác
+    printf("Nhập độ dài cạnh đáy x (cm): ");
+    scanf("%f", &x);
+    printf("Nhập chiều cao h (cm): ");
+    scanf("%f", &h);
+
+    // Tính diện tích tam giác
+    S = (x * h) / 2;
+
+    // In kết quả
+    printf("Diện tích tam giác là: %.2f cm²\n", S);
+
+    return 0;
+}
+
+//Câu 9: Chuyển đổi số có 5 chữ số thành một số nguyên dương có đúng 3 chữ số
+#include <stdio.h>
+
+int main() {
+    int n, result;
+
+    // Nhập số có 5 chữ số
+    printf("Nhập số nguyên có 5 chữ số: ");
+    scanf("%d", &n);
+
+    // Loại bỏ chữ số đầu và cuối
+    result = (n / 10) % 1000;
+
+    // In kết quả
+    printf("Số có 3 chữ số sau khi loại bỏ: %d\n", result);
+
+    return 0;
+}
+
+//Câu 10: Viết chương trình tính 
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    float x, S;
+
+    // Nhập số thực x
+    printf("Nhập giá trị của x: ");
+    scanf("%f", &x);
+
+    // Tính S(x)
+    S = x + pow(x, 3) + pow(x, 5) + pow(x, 7);
+
+    // In kết quả
+    printf("Giá trị của S(x) là: %.2f\n", S);
+
+    return 0;
+}
