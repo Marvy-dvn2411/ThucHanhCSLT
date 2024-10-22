@@ -1,0 +1,225 @@
+Câu 4:
+
+a. Hàm tìm số Fibonacci thứ n:
+
+#include <stdio.h>
+
+int fibonacci(int n) {
+    if (n <= 1) {
+        return n;
+    }
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int n;
+    printf("Nhập số n: ");
+    scanf("%d", &n);
+    printf("Số Fibonacci thứ %d là %d\n", n, fibonacci(n));
+    return 0;
+}
+
+b. Hàm liệt kê các số Fibonacci nhỏ hơn n:
+
+#include <stdio.h>
+
+void lietKeFibonacci(int n) {
+    int a = 0, b = 1, c;
+    printf("Các số Fibonacci nhỏ hơn %d: ", n);
+    while (a < n) {
+        printf("%d ", a);
+        c = a + b;
+        a = b;
+        b = c;
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Nhập số n: ");
+    scanf("%d", &n);
+    lietKeFibonacci(n);
+    return 0;
+}
+
+Câu 5:
+
+Chương trình tính tiền lương ngày công:
+
+#include <stdio.h>
+
+int tinhLuong(int gioVao, int gioRa) {
+    int luong = 0;
+    for (int gio = gioVao; gio < gioRa; gio++) {
+        if (gio < 12) {
+            luong += 6000;
+        } else {
+            luong += 7500;
+        }
+    }
+    return luong;
+}
+
+int main() {
+    int gioVao, gioRa;
+    printf("Nhập giờ vào ca (6-18): ");
+    scanf("%d", &gioVao);
+    printf("Nhập giờ ra ca (6-18): ");
+    scanf("%d", &gioRa);
+    
+    if (gioVao >= 6 && gioRa <= 18 && gioRa > gioVao) {
+        printf("Tiền lương là: %d\n", tinhLuong(gioVao, gioRa));
+    } else {
+        printf("Giờ vào/ra không hợp lệ.\n");
+    }
+    return 0;
+}
+
+BÀI TẬP VỀ NHÀ 
+
+Câu 6:
+
+Hàm kiểm tra số chính phương:
+
+#include <stdio.h>
+#include <math.h>
+
+int kiemTraChinhPhuong(int n) {
+    int canBacHai = sqrt(n);
+    return (canBacHai * canBacHai == n);
+}
+
+int main() {
+    int n;
+    printf("Nhập số n: ");
+    scanf("%d", &n);
+    if (kiemTraChinhPhuong(n)) {
+        printf("%d là số chính phương\n", n);
+    } else {
+        printf("%d không phải là số chính phương\n", n);
+    }
+    return 0;
+}
+
+Câu 7:
+
+Hàm liệt kê các số chính phương từ 1 tới n:
+
+#include <stdio.h>
+#include <math.h>
+
+void lietKeChinhPhuong(int n) {
+    printf("Các số chính phương từ 1 đến %d: ", n);
+    for (int i = 1; i * i <= n; i++) {
+        printf("%d ", i * i);
+    }
+    printf("\n");
+}
+
+int main() {
+    int n;
+    printf("Nhập số n: ");
+    scanf("%d", &n);
+    lietKeChinhPhuong(n);
+    return 0;
+}
+
+Câu 8:
+
+Hàm xuất ra "họ tên học sinh - điểm trung bình - kết quả xếp loại":
+
+#include <stdio.h>
+
+void xepLoaiHocSinh(char hoten[], float toan, float van, float anhVan) {
+    float diemTB = (toan + van + anhVan) / 3;
+    printf("Họ tên: %s\n", hoten);
+    printf("Điểm trung bình: %.2f\n", diemTB);
+
+    if (diemTB >= 8) {
+        printf("Xếp loại: Giỏi\n");
+    } else if (diemTB >= 6.5) {
+        printf("Xếp loại: Khá\n");
+    } else if (diemTB >= 5) {
+        printf("Xếp loại: Trung bình\n");
+    } else {
+        printf("Xếp loại: Yếu\n");
+    }
+}
+
+int main() {
+    char hoten[50];
+    float toan, van, anhVan;
+    printf("Nhập họ tên học sinh: ");
+    gets(hoten);
+    printf("Nhập điểm Toán: ");
+    scanf("%f", &toan);
+    printf("Nhập điểm Văn: ");
+    scanf("%f", &van);
+    printf("Nhập điểm Anh Văn: ");
+    scanf("%f", &anhVan);
+
+    xepLoaiHocSinh(hoten, toan, van, anhVan);
+    return 0;
+}
+
+Câu 9:
+
+Hàm tính tổng các chữ số chẵn của số nguyên dương n:
+
+#include <stdio.h>
+
+int tongChuSoChan(int n) {
+    int tong = 0;
+    while (n > 0) {
+        int chuSo = n % 10;
+        if (chuSo % 2 == 0) {
+            tong += chuSo;
+        }
+        n /= 10;
+    }
+    return tong;
+}
+
+int main() {
+    int n;
+    printf("Nhập số nguyên dương n: ");
+    scanf("%d", &n);
+    printf("Tổng các chữ số chẵn của %d là: %d\n", n, tongChuSoChan(n));
+    return 0;
+}
+
+Câu 10:
+
+Hàm kiểm tra các chữ số của số nguyên dương n có giảm dần đều hay không:
+
+#include <stdio.h>
+
+int kiemTraGiamDan(int n) {
+    int chuSoCuoi = n % 10;
+    n /= 10;
+    
+    while (n > 0) {
+        int chuSoHienTai = n % 10;
+        if (chuSoHienTai <= chuSoCuoi) {
+            return 0;
+        }
+        chuSoCuoi = chuSoHienTai;
+        n /= 10;
+    }
+    return 1;
+}
+
+int main() {
+    int n;
+    printf("Nhập số nguyên dương n: ");
+    scanf("%d", &n);
+    
+    if (kiemTraGiamDan(n)) {
+        printf("Các chữ số của %d giảm dần\n", n);
+    } else {
+        printf("Các chữ số của %d không giảm dần\n", n);
+    }
+    
+    return 0;
+}
